@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",
-    "gh-pages": "^6.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
@@ -16,7 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -36,5 +37,9 @@
       "last 1 safari version"
     ]
   },
-  "deploy": "gh-pages -b main -d build"
+  "deploy": "gh-pages -b main -d build",
+  "homepage": "https://justniar.github.io/BTS/",
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
+  }
 }
