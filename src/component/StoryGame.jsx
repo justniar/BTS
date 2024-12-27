@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AppContainer, OptionButton, OptionList } from "../styled";
 
 const StoryGame = () => {
   const [currentStep, setCurrentStep] = useState("awal");
   const [story, setStory] = useState({});
 
-  useEffect(() => {
-    fetch("/story.json")
-      .then((response) => response.json())
-      .then((data) => setStory(data))
-      .catch((error) => console.error("Error loading story:", error));
-  }, []);
+  fetch("/story.json")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => setStory(data))
+  .catch((error) => console.error("Error loading story:", error));
 
   const handleOptionClick = (nextStep) => {
     setCurrentStep(nextStep);
