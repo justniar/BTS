@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { OptionButton, RestartButton } from "../styled";
 
 const PickANumber = () => {
   const [targetNumber, setTargetNumber] = useState(generateRandomNumber());
@@ -57,7 +58,7 @@ const PickANumber = () => {
         style={{ padding: "10px", fontSize: "16px" }}
       />
       <br />
-      <button
+      <OptionButton
         onClick={handleGuess}
         style={{
           padding: "10px 20px",
@@ -70,20 +71,12 @@ const PickANumber = () => {
         }}
       >
         Guess
-      </button>
-      <button
+      </OptionButton>
+      <RestartButton
         onClick={restartGame}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "#28A745",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
       >
         Restart Game
-      </button>
+      </RestartButton>
       <p>Attempts: {attempts}</p>
     </div>
   );

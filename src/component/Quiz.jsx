@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { OptionButton, OptionList, QuestionText, QuizContainer, RestartButton, Results, ResultsContainer, ResultText } from "../styled";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -39,65 +40,45 @@ const Quiz = () => {
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
+    <QuizContainer>
       <h1>Quiz App</h1>
       {!showResults ? (
         <div>
-          <h2>{questions[currentQuestion].question}</h2>
-          <div>
+          <QuestionText>{questions[currentQuestion].question}</QuestionText>
+          <OptionList>
             {questions[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleAnswer(option)}
-                style={{
-                  display: "block",
-                  margin: "10px 0",
-                  padding: "10px",
-                  backgroundColor: "#007BFF",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
+              <OptionButton key={index} onClick={() => handleAnswer(option)}>
                 {option}
-              </button>
+              </OptionButton>
             ))}
-          </div>
+          </OptionList>
         </div>
       ) : (
-        <div>
+        <ResultsContainer>
           <h2>Results</h2>
           <ul>
             {questions.map((question, index) => (
-              <li key={index}>
+              <Results
+                key={index}
+                correct={userAnswers[index] === question.answer}
+              >
                 {question.question} -{" "}
                 {userAnswers[index] === question.answer ? (
-                  <span style={{ color: "green" }}>Correct</span>
+                  <ResultText correct>
+                    Correct ✔️
+                  </ResultText>
                 ) : (
-                  <span style={{ color: "red" }}>
-                    Wrong (Correct answer: {question.answer})
-                  </span>
+                  <ResultText>
+                    Wrong ❌ (Correct answer: {question.answer})
+                  </ResultText>
                 )}
-              </li>
+              </Results>
             ))}
           </ul>
-          <button
-            onClick={restartQuiz}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#007BFF",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Restart Quiz
-          </button>
-        </div>
+          <RestartButton onClick={restartQuiz}>Restart Quiz</RestartButton>
+        </ResultsContainer>
       )}
-    </div>
+    </QuizContainer>
   );
 };
 

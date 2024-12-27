@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AppContainer, OptionButton, OptionList } from "../styled";
 
 const StoryGame = () => {
   const [currentStep, setCurrentStep] = useState("awal");
@@ -20,12 +21,12 @@ const StoryGame = () => {
   }
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
+    <AppContainer style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
       <h1>Pilih Petualanganmu</h1>
       <p>{story[currentStep].text}</p>
-      <div>
+      <OptionList>
         {story[currentStep].options.map((option, index) => (
-          <button
+          <OptionButton
             key={index}
             onClick={() => handleOptionClick(option.next)}
             style={{
@@ -40,10 +41,10 @@ const StoryGame = () => {
             }}
           >
             {option.text}
-          </button>
+          </OptionButton>
         ))}
-      </div>
-    </div>
+      </OptionList>
+    </AppContainer>
   );
 };
 
